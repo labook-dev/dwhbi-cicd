@@ -1,4 +1,4 @@
-function DWHBI-VSProjects-Build {
+function DWHBI-VSProject-Build {
     param (
         [Parameter(Mandatory = $true)]
         [string]$projectFile

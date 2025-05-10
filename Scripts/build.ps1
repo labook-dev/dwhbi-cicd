@@ -22,7 +22,7 @@ foreach ($package in $ssisPackages) {
     $fullPath = Join-Path -Path $RootPath -ChildPath (Join-Path -Path $Config.Path.Repos -ChildPath (Join-Path -Path $Config.Bitbucket.Project -ChildPath (Join-Path -Path $Repository -ChildPath $package))))
     $projectFile = DWHBI-VSProject-FindProjectFile -StartFileWithName $fullPath -Verbose
     Write-Output "Projektovy soubor pro balicek '$package': $projectFile"
-    DWHBI-VSProjects-Build -ProjectFile $projectFile -Verbose
+    DWHBI-VSProject-Build -ProjectFile $projectFile -Verbose
 }
 
 

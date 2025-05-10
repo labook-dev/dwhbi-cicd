@@ -108,19 +108,3 @@ function DWHBI-Deploy-SSISPackage {
         Write-Output "SSIS balicek byl nasazen na serveru $($SSISDeployObject.SQLServer) do prostredi $($SSISDeployObject.Environment)"
     }
 }
-
-# Vytvoření přihlašovacího objektu
-$securePassword = ConvertTo-SecureString "SuperSecurePass" -AsPlainText -Force
-$credential = New-Object System.Management.Automation.PSCredential ("AdminUser", $securePassword)
-
-# Vytvoření objektu sestavení SSIS projektu
-$buildConfig = New-SSISBuildConfig -ssisProjectPath "C:\SSISProject\MyProject.dtproj" -outputPath "C:\SSISBuildOutput" -parameters @("/p:Parameter1=Value1", "/p:Parameter2=Value2") -configuration "Release" -loggingLevel "Verbose" -errorLogPath "C:\Logs\SSISBuild.log"
-
-# Vytvoření objektu nasazení SSIS balíčku
-$deployConfig = DWHBI-New-SSISDeployObject -ssisPackagePath "C:\SSISBuildOutput\Package.dtsx" -sqlServer "MySQLServer" -ssisCatalog "SSISDB" -folder "MyFolder" -projectName "MyProject" -packageName "MyPackage" -credential $credential -environment "PROD" -overwrite $false -parameterValues @{Param1="NewValue"; Param2="AnotherValue"}
-
-# Volání funkcí
-DWHBI-Build-SSISProject -config $buildConfig
-DWHBI-Load-SSISLibrary
-DWHBI-Deploy-SSISPackage -config $deployConfig -useLibrary $false
-DWHBI-Deploy-SSISPackage -config $deployConfig -useLibrary $true

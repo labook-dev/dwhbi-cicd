@@ -4,7 +4,6 @@ function DWHBI-GitClone {
         [string]$BranchName = "jenkins/DWHI-24968-nasazeni-na-prod-repdata-provize"
     )
 
-
     # Nacteni konfigurace
     $Config = DWHBI-GetConfig
     $AppRoot = $Config.Path.Root
@@ -26,7 +25,7 @@ function DWHBI-GitClone {
 
     # Definice cest na disku
     $ReposPath = $Config.Path.Repos    
-    $WorkingPath = Join-Path -Path $AppRoot -ChildPath (Join-Path -Path $ReposPath -ChildPath (Join-Path -Path $ProjectName -ChildPath (Join-Path -Path $RepositoryName -ChildPath $BranchNameSafe))))
+    $WorkingPath = Join-Path -Path $AppRoot -ChildPath (Join-Path -Path $ReposPath -ChildPath (Join-Path -Path $ProjectName -ChildPath (Join-Path -Path $RepositoryName -ChildPath $BranchNameSafe)))
 
     Set-Location $AppRoot
 
@@ -68,7 +67,7 @@ function DWHBI-GitClone {
     }
 
     # Zapis hodnoty $WorkingPath do adresare Temp
-    Write-ParameterToTempJson -ParameterName "WorkingPath" -ParameterValue $WorkingPath
+    DWHBI-Write-ParameterToTempJson -ParameterName "WorkingPath" -ParameterValue $WorkingPath
 
     # Vraci cestu k pracovnimu adresari
     return $WorkingPath
