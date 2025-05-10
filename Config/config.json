@@ -1,0 +1,88 @@
+{
+  "Deployment": {
+    "SqlServer": {
+      "Connection": {
+        "Server": "CZSDWHBIPROD",
+        "Authentication": "SQL",
+        "Username": "sql-user",
+        "PasswordFile": "sec_PROD_sqlserver_login.txt",
+        "TrustServerCertificate": true,
+        "ApplicationIntent": "ReadWrite",
+        "ConnectionTimeout": 60,
+        "Encryption": true,
+        "LoadBalanceTimeout": 120,
+        "MaxPoolSize": 200,
+        "MultiSubnetFailover": true,
+        "PacketSize": 8192,
+        "WorkstationID": "CICD-WORKSTATION"
+      },
+      "SSISDeployment": {
+        "Catalog": "SSISDB",
+        "ConnectionTimeout": 60,
+        "Encryption": true,
+        "Environment": "DEV",
+        "PasswordFile": "sec_DEV_ssis_login.txt",
+        "Port": 1433,
+        "Server": "CZSDWHBIDEV",
+        "TrustServerCertificate": true,
+        "Username": "ssis-user"
+      },
+      "SSRSDeployment": {
+        "ReportServerUrl": "http://localhost/ReportServer",
+        "FolderPath": "/Reports",
+        "DataSourceName": "DataSource",
+        "Username": "admin",
+        "PasswordFile": "sec_default_ssrs_login.txt",
+        "Timeout": 100
+      },
+      "SSASDeployment": {
+        "Server": "CZSDWHBIPROD",
+        "Database": "DWHBI_SSAS",
+        "Username": "ssas-user",
+        "PasswordFile": "sec_PROD_ssas_login.txt",
+        "ProcessingOption": "Default",
+        "BackupBeforeDeploy": true,
+        "Timeout": 300
+      }
+    },
+    "Teradata": {
+      "Authentication": "TD2",
+      "ConnectionTimeout": 60,
+      "Driver": "Teradata ODBC Driver 17.0",
+      "EncryptData": true,
+      "LogonMechanism": "LDAP",
+      "MaxSessions": 50,
+      "PasswordFile": "sec_PROD_teradata_login",
+      "Server": "CZSDWHBIPROD",
+      "TDSystem": "CZSDWHBIPROD",
+      "UseKerberos": false
+    }
+  },
+  "Path": {
+    "Root": "D:/vscode/powershell/dwhbi-cicd",
+    "Secure": "Config/Secure/",
+    "Artefakt": "artefakt/",
+    "Output": "output/",
+    "Repos": "Repos/",
+    "Temp": "temp/",
+    "Tool": "tool/",
+    "Scripts": {
+      "Actions": "Scripts/Actions/",
+      "Config": "Scripts/Config/",
+      "Modules": "Scripts/Modules/"    
+    }
+  },
+  "Tools": {
+    "DevenvPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/Common7/IDE/devenv.exe",
+    "SSISLibrary": "C:/Program Files/Microsoft SQL Server/150/SDK/Assemblies/Microsoft.SqlServer.Management.IntegrationServices.dll",
+    "MSBuild": "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/MSBuild/Current/Bin/MSBuild.exe",
+    "SQLPackage": "C:/Program Files/Microsoft SQL Server/150/DAC/bin/SqlPackage.exe",
+    "DTUtil": "C:/Program Files/Microsoft SQL Server/Client SDK/DTExec/dtutil.exe"
+  },
+  "Bitbucket": {
+    "BaseUrl": "https://git.cpas.cz/rest/api/1.0",
+    "Project": "DWHBI",
+    "Username": "cz_svcd_dwhbi_git",
+    "TokenFile": "git_sec_cz_svcd_dwhbi_git.txt"
+  }
+}
