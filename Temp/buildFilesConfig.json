@@ -1,0 +1,52 @@
+﻿{
+    "Project":  "DWHBI",
+    "files":  {
+                  "SQL":  {
+                              "TD":  "D:\\vscode\\powershell\\dwhbi-cicd\\artefakt\\TD.sql",
+                              "MS":  "D:\\vscode\\powershell\\dwhbi-cicd\\artefakt\\MS.sql"
+                          },
+                  "VS":  {
+                             "SSRS":  {
+                                          "Projects":  [
+                                                           {
+                                                               "Files":  [
+                                                                             "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSRS\\ReportSLN1\\ReportProject1\\Report1.rdl",
+                                                                             "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSRS\\ReportSLN1\\ReportProject1\\SharedDataSet1.rsd",
+                                                                             "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSRS\\ReportSLN1\\ReportProject1\\SharedDataSource1.rds"
+                                                                         ],
+                                                               "ProjectFile":  "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSRS\\ReportSLN1\\ReportProject1\\ReportProject1.rptproj"
+                                                           }
+                                                       ]
+                                      },
+                             "SSIS":  {
+                                          "Projects":  [
+                                                           {
+                                                               "Files":  [
+                                                                             "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution11\\Project1\\Package1.dtsx",
+                                                                             "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution11\\Project1\\Package2.dtsx",
+                                                                             "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution11\\Project1\\Package3.dtsx"
+                                                                         ],
+                                                               "ProjectFile":  "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution11\\Project1\\Project1.dtproj"
+                                                           },
+                                                           {
+                                                               "Files":  [
+                                                                             "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution12\\Project2\\Package1.dtsx",
+                                                                             "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution12\\Project2\\Package2.dtsx",
+                                                                             "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution12\\Project2\\Package3.dtsx"
+                                                                         ],
+                                                               "ProjectFile":  "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution12\\Project2\\Project2.dtproj"
+                                                           },
+                                                           {
+                                                               "Files":  [
+                                                                             "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution13\\Project1\\Package1.dtsx",
+                                                                             "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution13\\Project1\\Package2.dtsx",
+                                                                             "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution13\\Project1\\Package3.dtsx"
+                                                                         ],
+                                                               "ProjectFile":  "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution13\\Project1\\Project3.dtproj"
+                                                           }
+                                                       ]
+                                      }
+                         }
+              },
+    "Repository":  ""
+}

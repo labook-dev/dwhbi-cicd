@@ -9,14 +9,14 @@
     Nazev parametru, ktery bude zapsan do JSON souboru.
 
 .PARAMETER ParameterValue
-    Hodnota parametru, ktera bude zapsana do JSON souboru.
+    Hodnota parametru, ktera bude zapsana dDWHBI-Write-ParameterToTempJsono JSON souboru.
 
 .NOTES
     Autor: [Tve jmeno]
     Datum: [Aktualni datum]
 #>
 
-function DWHBI-Write-ParameterToTempJson {
+function DWHBI-Write-ParameterToTempJson{
     param (
         [Parameter(Mandatory = $true)]
         [string]$ParameterName,

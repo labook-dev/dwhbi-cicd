@@ -1,10 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution11\\",
+  "WorkspaceRootPath": "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSRS\\ReportSLN1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F77FB2E4-46D0-6CF5-35EF-E39B0C77F2BB}|Project1\\Project1.dtproj|D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution11\\Project1\\Package1.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
-      "RelativeMoniker": "D:0:0:{F77FB2E4-46D0-6CF5-35EF-E39B0C77F2BB}|Project1\\Project1.dtproj|solutionrelative:Project1\\Package1.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+      "AbsoluteMoniker": "D:0:0:{0D1B1980-5483-EB02-B84A-9C49E1A7B1E4}|ReportProject1\\ReportProject1.rptproj|D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSRS\\ReportSLN1\\ReportProject1\\Report1.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}",
+      "RelativeMoniker": "D:0:0:{0D1B1980-5483-EB02-B84A-9C49E1A7B1E4}|ReportProject1\\ReportProject1.rptproj|solutionrelative:ReportProject1\\Report1.rdl||{420F4200-DD61-4785-81F3-52669CBC208E}"
     }
   ],
   "DocumentGroupContainers": [
@@ -75,13 +75,13 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Package1.dtsx [Design]",
-              "DocumentMoniker": "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution11\\Project1\\Package1.dtsx",
-              "RelativeDocumentMoniker": "Project1\\Package1.dtsx",
-              "ToolTip": "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution11\\Project1\\Package1.dtsx [Design]",
-              "RelativeToolTip": "Project1\\Package1.dtsx [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2025-05-09T05:54:07.625Z",
+              "Title": "Report1.rdl [Design]",
+              "DocumentMoniker": "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSRS\\ReportSLN1\\ReportProject1\\Report1.rdl",
+              "RelativeDocumentMoniker": "ReportProject1\\Report1.rdl",
+              "ToolTip": "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSRS\\ReportSLN1\\ReportProject1\\Report1.rdl [Design]",
+              "RelativeToolTip": "ReportProject1\\Report1.rdl [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002573|",
+              "WhenOpened": "2025-05-10T21:23:54.465Z",
               "EditorCaption": " [Design]"
             }
           ]

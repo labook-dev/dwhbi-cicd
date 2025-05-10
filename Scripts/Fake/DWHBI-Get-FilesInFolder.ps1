@@ -8,8 +8,10 @@ function DWHBI-Get-FilesInFolder {
         throw "Slozka '$folderPath' neexistuje."
     }
 
-    # Ziskani seznamu souboru ve slozce rekurzivne
-    $files = Get-ChildItem -Path $folderPath -File -Recurse | ForEach-Object { $_.FullName }
+    # Ziskani seznamu souboru ve slozce rekurzivne, vynechani slozek bin a obj
+    $files = Get-ChildItem -Path $folderPath -File -Recurse | Where-Object { 
+        $_.FullName -notmatch "\\bin\\" -and $_.FullName -notmatch "\\obj\\" 
+    } | ForEach-Object { $_.FullName }
 
     return $files
 }

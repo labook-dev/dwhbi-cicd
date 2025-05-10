@@ -1,0 +1,27 @@
+﻿{
+    "SQL":  {
+                "MSSQL":  [
+                              "Skript: Join-MSSQLSqlFiles.ps1 Aktualni adresar: D:\\vscode\\powershell\\dwhbi-cicd",
+                              "D:\\vscode\\powershell\\dwhbi-cicd\\artefakt\\MS.sql"
+                          ],
+                "Teradata":  "D:\\vscode\\powershell\\dwhbi-cicd\\artefakt\\TD.sql"
+            },
+    "DTSX":  [
+                 "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution11\\Project1\\Package1.dtsx",
+                 "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution11\\Project1\\Package2.dtsx",
+                 "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution11\\Project1\\Package3.dtsx",
+                 "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution12\\Project2\\Package1.dtsx",
+                 "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution12\\Project2\\Package2.dtsx",
+                 "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution12\\Project2\\Package3.dtsx",
+                 "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution13\\Project1\\Package1.dtsx",
+                 "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution13\\Project1\\Package2.dtsx",
+                 "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution13\\Project1\\Package3.dtsx"
+             ],
+    "PROJECT":  {
+                    "SSIS":  [
+                                 "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution11\\Project1\\Project1.dtproj",
+                                 "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution12\\Project2\\Project2.dtproj",
+                                 "D:\\vscode\\powershell\\dwhbi-cicd\\Repos\\DWHBI\\dwhbi.testovaci\\SSIS\\Solution13\\Project1\\Project3.dtproj"
+                             ]
+                }
+}

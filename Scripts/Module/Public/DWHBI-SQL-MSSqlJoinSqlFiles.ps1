@@ -22,7 +22,7 @@ function DWHBI-SQL-MSSqlJoinSqlFiles  {
         [string[]]$SqlFiles
     )
 
-    Write-Output "Skript: Join-MSSQLSqlFiles.ps1 Aktualni adresar: $(Get-Location)"
+    #Write-Output "Skript: Join-MSSQLSqlFiles.ps1 Aktualni adresar: $(Get-Location)"
 
     try {
         # Kontrola, zda je $PSScriptRoot definovan

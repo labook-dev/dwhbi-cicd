@@ -1,40 +1,31 @@
 # Funkce pro nacteni SSIS knihovny
 function DWHBI-Load-SSISLibrary {
     param (
-        [string]$libraryPath = "C:\Program Files\Microsoft SQL Server\150\SDK\Assemblies\Microsoft.SqlServer.Management.IntegrationServices.dll"
+        [string]$libraryPath
     )
+    # Overeni, zda cesta ke knihovne existuje
     if (Test-Path $libraryPath) {
+        # Pridani typu z knihovny
         Add-Type -Path $libraryPath
         Write-Output "SSIS knihovna byla uspesne nactena."
     } else {
+        # Vypis chyby, pokud knihovna nebyla nalezena
         Write-Output "SSIS knihovna nebyla nalezena na ceste: $libraryPath"
     }
 }
 function DWHBI-New-SSISDeployObject {
-    param (
-        [string]$ssisPackagePath,
-        [string]$sqlServer,
-        [string]$ssisCatalog,
-        [string]$folder,
-        [string]$projectName,
-        [string]$packageName,
-        [PSCredential]$credential,
-        [string]$environment = "DEV",
-        [bool]$overwrite = $true,
-        [hashtable]$parameterValues = @{}
-    )
-
+    # Vytvoreni noveho objektu pro nasazeni SSIS balicku
     return [PSCustomObject]@{
-        SSISPackagePath  = $ssisPackagePath
-        SQLServer        = $sqlServer
-        SSISCatalog      = $ssisCatalog
-        Folder           = $folder
-        ProjectName      = $projectName
-        PackageName      = $packageName
-        Credential       = $credential
-        Environment      = $environment
-        Overwrite        = $overwrite
-        ParameterValues  = $parameterValues
+        SSISPackagePath  = ""
+        SQLServer        = ""
+        SSISCatalog      = ""
+        Folder           = ""
+        ProjectName      = ""
+        PackageName      = ""
+        Credential       = $null
+        Environment      = "DEV"
+        Overwrite        = $true
+        ParameterValues  = @{}
     }
 }
 
@@ -44,13 +35,17 @@ function DWHBI-Build-SSISProject {
         [PSCustomObject]$SSISDeployObject
     )
 
+    # Cesta k Visual Studio devenv.exe
     $devenvPath = "C:\Program Files (x86)\Microsoft Visual Studio\2022\Professional\Common7\IDE\devenv.exe"
+    # Sestaveni prikazu pro sestaveni projektu
     $command = "$devenvPath `"$($SSISDeployObject.SSISProjectPath)`" `
         /Build $($SSISDeployObject.Configuration) `
         /Out `"$($SSISDeployObject.OutputPath)`" " + `
         ($SSISDeployObject.Parameters -join " ")
 
+    # Spusteni prikazu
     Invoke-Expression $command
+    # Vypis vysledku sestaveni
     Write-Output "SSIS projekt byl sestaven do $($SSISDeployObject.OutputPath) s konfiguraci $($SSISDeployObject.Configuration)"
     Write-Output "Build log ulozen na $($SSISDeployObject.ErrorLogPath)"
 }
@@ -73,16 +68,19 @@ function DWHBI-Deploy-SSISPackage {
         $ssisDb = $ssisServer.Catalogs[$SSISDeployObject.SSISCatalog]
         $project = $ssisDb.Folders[$SSISDeployObject.Folder].Projects[$SSISDeployObject.ProjectName]
 
+        # Nastaveni parametru projektu
         foreach ($key in $SSISDeployObject.ParameterValues.Keys) {
             $project.Parameters[$key].Set($SSISDeployObject.ParameterValues[$key])
         }
 
+        # Kontrola, zda prepsat existujici balicek
         if ($SSISDeployObject.Overwrite) {
             Write-Output "Existujici balicek bude prepsan."
         } else {
             Write-Output "Balicek nebude prepsan."
         }
 
+        # Nasazeni balicku
         $project.Deploy($SSISDeployObject.SSISPackagePath)
         Write-Output "SSIS balicek byl nasazen pomoci Integration Services knihovny do prostredi $($SSISDeployObject.Environment)"
     } else {
@@ -94,16 +92,19 @@ function DWHBI-Deploy-SSISPackage {
             /User $($SSISDeployObject.Credential.Username) `
             /Password $($SSISDeployObject.Credential.GetNetworkCredential().Password)"
 
+        # Pridani parametru do prikazu
         foreach ($key in $SSISDeployObject.ParameterValues.Keys) {
             $command += " /SET \Package.$key=$($SSISDeployObject.ParameterValues[$key])"
         }
 
+        # Kontrola, zda prepsat existujici balicek
         if ($SSISDeployObject.Overwrite) {
             Write-Output "Existujici balicek bude prepsan."
         } else {
             Write-Output "Balicek nebude prepsan."
         }
 
+        # Spusteni prikazu
         Invoke-Expression $command
         Write-Output "SSIS balicek byl nasazen na serveru $($SSISDeployObject.SQLServer) do prostredi $($SSISDeployObject.Environment)"
     }
