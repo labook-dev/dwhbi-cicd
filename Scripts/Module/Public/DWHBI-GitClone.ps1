@@ -4,6 +4,7 @@ function DWHBI-GitClone {
         [string]$BranchName = "jenkins/DWHI-24968-nasazeni-na-prod-repdata-provize"
     )
 
+
     # Nacteni konfigurace
     $Config = DWHBI-GetConfig
     $AppRoot = $Config.Path.Root
