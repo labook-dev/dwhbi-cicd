@@ -1,16 +1,16 @@
-# Funkce pro načtení SSIS knihovny
-function Load-SSISLibrary {
+# Funkce pro nacteni SSIS knihovny
+function DWHBI-Load-SSISLibrary {
     param (
         [string]$libraryPath = "C:\Program Files\Microsoft SQL Server\150\SDK\Assemblies\Microsoft.SqlServer.Management.IntegrationServices.dll"
     )
     if (Test-Path $libraryPath) {
         Add-Type -Path $libraryPath
-        Write-Output "SSIS knihovna byla úspěšně načtena."
+        Write-Output "SSIS knihovna byla uspesne nactena."
     } else {
-        Write-Output "SSIS knihovna nebyla nalezena na cestě: $libraryPath"
+        Write-Output "SSIS knihovna nebyla nalezena na ceste: $libraryPath"
     }
 }
-function New-SSISDeployObject {
+function DWHBI-New-SSISDeployObject {
     param (
         [string]$ssisPackagePath,
         [string]$sqlServer,
@@ -38,8 +38,8 @@ function New-SSISDeployObject {
     }
 }
 
-# Funkce pro sestavení SSIS projektu
-function Build-SSISProject {
+# Funkce pro sestaveni SSIS projektu
+function DWHBI-Build-SSISProject {
     param (
         [PSCustomObject]$SSISDeployObject
     )
@@ -51,22 +51,19 @@ function Build-SSISProject {
         ($SSISDeployObject.Parameters -join " ")
 
     Invoke-Expression $command
-    Write-Output "SSIS projekt byl sestaven do $($SSISDeployObject.OutputPath) s konfigurací $($SSISDeployObject.Configuration)"
-    Write-Output "Build log uložen na $($SSISDeployObject.ErrorLogPath)"
+    Write-Output "SSIS projekt byl sestaven do $($SSISDeployObject.OutputPath) s konfiguraci $($SSISDeployObject.Configuration)"
+    Write-Output "Build log ulozen na $($SSISDeployObject.ErrorLogPath)"
 }
 
-# Funkce pro vytvoření objektu nasazení SSIS balíčku
-
-
-# Funkce pro nasazení SSIS balíčku
-function Deploy-SSISPackage {
+# Funkce pro nasazeni SSIS balicku
+function DWHBI-Deploy-SSISPackage {
     param (
         [PSCustomObject]$SSISDeployObject,
         [bool]$useLibrary = $false
     )
 
     if ($useLibrary) {
-        # Nasazení pomocí knihovny
+        # Nasazeni pomoci knihovny
         $connection = New-Object Microsoft.SqlServer.Management.Common.ServerConnection($SSISDeployObject.SQLServer)
         $connection.LoginSecure = $false
         $connection.Login = $SSISDeployObject.Credential.Username
@@ -81,15 +78,15 @@ function Deploy-SSISPackage {
         }
 
         if ($SSISDeployObject.Overwrite) {
-            Write-Output "Existující balíček bude přepsán."
+            Write-Output "Existujici balicek bude prepsan."
         } else {
-            Write-Output "Balíček nebude přepsán."
+            Write-Output "Balicek nebude prepsan."
         }
 
         $project.Deploy($SSISDeployObject.SSISPackagePath)
-        Write-Output "SSIS balíček byl nasazen pomocí Integration Services knihovny do prostředí $($SSISDeployObject.Environment)"
+        Write-Output "SSIS balicek byl nasazen pomoci Integration Services knihovny do prostredi $($SSISDeployObject.Environment)"
     } else {
-        # Nasazení pomocí DTEXEC
+        # Nasazeni pomoci DTEXEC
         $command = "DTEXEC `
             /File `"$($SSISDeployObject.SSISPackagePath)`" `
             /Server $($SSISDeployObject.SQLServer) `
@@ -102,13 +99,13 @@ function Deploy-SSISPackage {
         }
 
         if ($SSISDeployObject.Overwrite) {
-            Write-Output "Existující balíček bude přepsán."
+            Write-Output "Existujici balicek bude prepsan."
         } else {
-            Write-Output "Balíček nebude přepsán."
+            Write-Output "Balicek nebude prepsan."
         }
 
         Invoke-Expression $command
-        Write-Output "SSIS balíček byl nasazen na serveru $($SSISDeployObject.SQLServer) do prostředí $($SSISDeployObject.Environment)"
+        Write-Output "SSIS balicek byl nasazen na serveru $($SSISDeployObject.SQLServer) do prostredi $($SSISDeployObject.Environment)"
     }
 }
 
@@ -120,10 +117,10 @@ $credential = New-Object System.Management.Automation.PSCredential ("AdminUser",
 $buildConfig = New-SSISBuildConfig -ssisProjectPath "C:\SSISProject\MyProject.dtproj" -outputPath "C:\SSISBuildOutput" -parameters @("/p:Parameter1=Value1", "/p:Parameter2=Value2") -configuration "Release" -loggingLevel "Verbose" -errorLogPath "C:\Logs\SSISBuild.log"
 
 # Vytvoření objektu nasazení SSIS balíčku
-$deployConfig = New-SSISDeployObject -ssisPackagePath "C:\SSISBuildOutput\Package.dtsx" -sqlServer "MySQLServer" -ssisCatalog "SSISDB" -folder "MyFolder" -projectName "MyProject" -packageName "MyPackage" -credential $credential -environment "PROD" -overwrite $false -parameterValues @{Param1="NewValue"; Param2="AnotherValue"}
+$deployConfig = DWHBI-New-SSISDeployObject -ssisPackagePath "C:\SSISBuildOutput\Package.dtsx" -sqlServer "MySQLServer" -ssisCatalog "SSISDB" -folder "MyFolder" -projectName "MyProject" -packageName "MyPackage" -credential $credential -environment "PROD" -overwrite $false -parameterValues @{Param1="NewValue"; Param2="AnotherValue"}
 
 # Volání funkcí
-Build-SSISProject -config $buildConfig
-Load-SSISLibrary
-Deploy-SSISPackage -config $deployConfig -useLibrary $false
-Deploy-SSISPackage -config $deployConfig -useLibrary $true
+DWHBI-Build-SSISProject -config $buildConfig
+DWHBI-Load-SSISLibrary
+DWHBI-Deploy-SSISPackage -config $deployConfig -useLibrary $false
+DWHBI-Deploy-SSISPackage -config $deployConfig -useLibrary $true

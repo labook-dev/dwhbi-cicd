@@ -1,4 +1,4 @@
-function Join-TeradataSqlFiles {
+function DWHBI-SQL-TeradataJoinSqlFiles {
     <#
     .SYNOPSIS
     Spoji vice SQL souboru do jednoho vystupniho souboru.
@@ -14,7 +14,7 @@ function Join-TeradataSqlFiles {
     Vraci cestu k vystupnimu souboru.
 
     .EXAMPLE
-    Join-TeradataSqlFiles -SqlFiles @("file1.sql", "file2.sql")
+    DWHBI-SQL-TeradataJoinSqlFiles -SqlFiles @("file1.sql", "file2.sql")
     #>
     [CmdletBinding()]
     param(
@@ -25,7 +25,7 @@ function Join-TeradataSqlFiles {
     try {
         # Skript zacina, vypis aktualni adresar
         Write-Verbose "Skript: Join-TeradataSqlFiles.ps1 Aktualni adresar: $(Get-Location)"
-        $config = Get-FullConfig
+        $config = DWHBI-GetConfig
         Write-Verbose "Konfigurace nactena."
 
         # Sestaveni cesty k artefaktum
@@ -49,7 +49,7 @@ function Join-TeradataSqlFiles {
         Write-Verbose "Vystupni soubor vytvoren."
 
         # Kontrola a vytvoreni slozky pro artefakty
-        $folderCreated = Invoke-EnsureFolderExists -FolderPath $ArtefaktFolder
+        $folderCreated = DWHBI-EnsureFolderExists -FolderPath $ArtefaktFolder
         Write-Verbose "Kontrola slozky pro artefakty dokoncena."
 
         if (-not $folderCreated) {

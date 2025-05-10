@@ -1,11 +1,11 @@
-﻿function Invoke-GitClone {
+function DWHBI-GitClone {
     param (
         [string]$RepositoryName = "dwhbi.testovaci",
         [string]$BranchName = "jenkins/DWHI-24968-nasazeni-na-prod-repdata-provize"
     )
 
     # Nacteni konfigurace
-    $Config = Get-FullConfig
+    $Config = DWHBI-GetConfig
     $AppRoot = $Config.Path.Root
     $SecureFileParh = Join-Path -Path $AppRoot -ChildPath $Config.Path.Secure
     $passwordFile = Join-Path -Path $SecureFileParh -ChildPath $Config.Bitbucket.PasswordFile
@@ -25,13 +25,13 @@
 
     # Definice cest na disku
     $ReposPath = $Config.Path.Repos    
-    $WorkingPath = Join-Path -Path $AppRoot -ChildPath (Join-Path -Path $ReposPath -ChildPath (Join-Path -Path $ProjectName -ChildPath (Join-Path -Path $RepositoryName -ChildPath $BranchNameSafe)))
+    $WorkingPath = Join-Path -Path $AppRoot -ChildPath (Join-Path -Path $ReposPath -ChildPath (Join-Path -Path $ProjectName -ChildPath (Join-Path -Path $RepositoryName -ChildPath $BranchNameSafe))))
 
     Set-Location $AppRoot
 
     # Kontrola, zda je nainstalovany Git
     if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
-        Write-Error "Invoke-GitClone: Git neni nainstalovany nebo neni v PATH."
+        Write-Error "DWHBI-GitClone: Git neni nainstalovany nebo neni v PATH."
         exit 1
     }
 
@@ -53,7 +53,7 @@
                 }
             }
         } else {
-            Write-Error "Invoke-GitClone: Adresar obsahuje jiny repozitar: $CurrentRepoUrl"
+            Write-Error "DWHBI-GitClone: Adresar obsahuje jiny repozitar: $CurrentRepoUrl"
             # Pokud slozka obsahuje jiny repozitar, odstrani se a inicializuje novy
             Write-Output "Adresar obsahuje jiny repozitar: $CurrentRepoUrl"
             Set-Location (Split-Path -Parent $WorkingPath)
@@ -66,17 +66,9 @@
         Initialize-Repository -Path $WorkingPath -RepoUrl $RepositoryUrl -Branch $BranchNameLocal
     }
 
-    # Zápis hodnoty $WorkingPath do adresáře Temp
+    # Zapis hodnoty $WorkingPath do adresare Temp
     Write-ParameterToTempJson -ParameterName "WorkingPath" -ParameterValue $WorkingPath
 
     # Vraci cestu k pracovnimu adresari
     return $WorkingPath
 }
-
-
-
-
-
-
-
-

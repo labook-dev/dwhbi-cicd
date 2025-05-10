@@ -3,19 +3,19 @@ param (
     [string]$BranchName = "main"
 )
 
-# Načtení konfigurace
-$Config = Get-fullConfig
+# Nacteni konfigurace
+$Config = DWHBI-GetConfig
 $RootPath = $Config.Path.Root
 
-# Nastavení aktuálního adresáře
+# Nastaveni aktualniho adresare
 Set-Location -Path $RootPath
 
 try {
-    # Klonování repozitáře
-    $WorkingPath = Invoke-GitClone -RepositoryName $RepositoryName -BranchName $BranchName
+    # Klonovani repozitare
+    $WorkingPath = DWHBI-GitClone -RepositoryName $RepositoryName -BranchName $BranchName
     
-    Write-Output "Repozitář byl úspěšně klonován do: $WorkingPath"
+    Write-Output "Repozitar byl uspesne klonovan do: $WorkingPath"
 } catch {
-    # Zpracování chyby
-    Write-Error "Chyba při klonování repozitáře: $($_.Exception.Message)"
+    # Zpracovani chyby
+    Write-Error "Chyba pri klonovani repozitare: $($_.Exception.Message)"
 }

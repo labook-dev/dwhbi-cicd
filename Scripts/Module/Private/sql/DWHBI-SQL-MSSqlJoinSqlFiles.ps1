@@ -1,4 +1,4 @@
-function Join-MSSQLSqlFiles {
+function DWHBI-SQL-MSSqlJoinSqlFiles  {
     <#
     .SYNOPSIS
     Spoji vice SQL souboru do jednoho vystupniho souboru.
@@ -14,7 +14,7 @@ function Join-MSSQLSqlFiles {
     Vraci cestu k vystupnimu souboru.
 
     .EXAMPLE
-    Join-MSSQLSqlFiles -SqlFiles @("file1.sql", "file2.sql") -RootFolder "C:\projekt"
+    DWHBI-SQL-MSSqlJoinSqlFiles  -SqlFiles @("file1.sql", "file2.sql") -RootFolder "C:\projekt"
     #>
     [CmdletBinding()]
     param(
@@ -31,7 +31,7 @@ function Join-MSSQLSqlFiles {
         }
 
         # Nacteni konfigurace
-        $config = Get-FullConfig 
+        $config = DWHBI-GetConfig 
         Write-Verbose "Konfigurace nactena."
 
         # Nacteni hodnot Path a Filename pro MS z config.json
@@ -52,7 +52,7 @@ function Join-MSSQLSqlFiles {
         Write-Verbose "Validace vstupnich souboru dokoncena."
 
        # Validace a vytvoreni vystupni slozky
-        $folderCreated = Invoke-EnsureFolderExists -FolderPath $artefaktPath
+        $folderCreated = DWHBI-EnsureFolderExists -FolderPath $artefaktPath
         Write-Verbose "Kontrola slozky pro artefakty dokoncena."
 
         if (-not $folderCreated) {
@@ -103,5 +103,4 @@ function Join-MSSQLSqlFiles {
     catch {
         throw "Doslo k chybe pri spojovani SQL souboru: $_"
     }
-   
 }

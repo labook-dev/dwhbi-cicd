@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-    Modul pro načítání funkcí ze složek 'public' a 'private'.
+    Modul pro nacitani funkci ze slozek 'public' a 'private'.
 
 .DESCRIPTION
-    Tento modul načítá všechny .ps1 soubory ze složek 'public' a 'private' a dot-source je, aby byly dostupné jako součást modulu.
+    Tento modul nacita vsechny .ps1 soubory ze slozek 'public' a 'private' a dot-source je, aby byly dostupne jako soucast modulu.
 
 .NOTES
     Autor: [Tve jmeno]
@@ -13,42 +13,42 @@
 # Ziskani cesty ke slozce skriptu
 $scriptRoot = $psScriptRoot
 
-# Definice složek pro veřejné a soukromé funkce
+# Definice slozek pro verejne a soukrome funkce
 $publicSubfolder = "public"
 $privateSubfolder = "private"
 
 $publicPath = Join-Path -Path $scriptRoot -ChildPath $publicSubfolder
 $privatePath = Join-Path -Path $scriptRoot -ChildPath $privateSubfolder
 
-# Kontrola existence složek
+# Kontrola existence slozek
 if (-not (Test-Path -Path $publicPath)) {
-    Write-Error "Složka s veřejnými funkcemi nebyla nalezena: $publicPath"
+    Write-Error "Slozka s verejnymi funkcemi nebyla nalezena: $publicPath"
     return
 }
 
 if (-not (Test-Path -Path $privatePath)) {
-    Write-Error "Složka se soukromými funkcemi nebyla nalezena: $privatePath"
+    Write-Error "Slozka se soukromymi funkcemi nebyla nalezena: $privatePath"
     return
 }
 
-# Načtení všech .ps1 souborů z veřejných a soukromých složek
+# Nacteni vsech .ps1 souboru z verejnych a soukromych slozek
 $publicFunctionFiles = Get-ChildItem -Path $publicPath -Filter *.ps1 -Recurse -File
 $privateFunctionFiles = Get-ChildItem -Path $privatePath -Filter *.ps1 -Recurse -File
 
-# Spojení kolekcí publicFunctionFiles a privateFunctionFiles
+# Spojeni kolekci publicFunctionFiles a privateFunctionFiles
 $allFunctionFiles = @()
 $allFunctionFiles += $publicFunctionFiles
 $allFunctionFiles += $privateFunctionFiles
 
 foreach ($file in $allFunctionFiles) {
     try {
-        Write-Verbose "Načítám funkci ze souboru: $($file.FullName)"
+        Write-Verbose "Nacitam funkci ze souboru: $($file.FullName)"
         . $file.FullName
     } catch {
-        Write-Error "Chyba při načítání souboru $($file.FullName): $($_.Exception.Message)"
+        Write-Error "Chyba pri nacitani souboru $($file.FullName): $($_.Exception.Message)"
     }
 }
 
-# Export názvů funkcí z veřejných složek (bez přípony)
+# Export nazvu funkci z verejnych slozek (bez pripony)
 $exportedFunctions = $publicFunctionFiles.BaseName | Sort-Object -Unique
 Export-ModuleMember -Function $exportedFunctions

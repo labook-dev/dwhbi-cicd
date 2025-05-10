@@ -1,4 +1,4 @@
-﻿function Set-BitbucketPullRequestComment {
+﻿function DWHBI-Bitbucket-SetPullRequestComment {
     <#
     .SYNOPSIS
     Prida komentar k pull requestu na Bitbucketu.
@@ -17,7 +17,7 @@
     Zadny vystup.
 
     .EXAMPLE
-    Set-BitbucketPullRequestComment -PullRequestId 4 -Comment "Toto je testovaci komentar."
+    DWHBI-Bitbucket-SetPullRequestComment -PullRequestId 4 -Comment "Toto je testovaci komentar."
     #>
     param (
         [Parameter(Mandatory = $true)]
@@ -29,15 +29,15 @@
     Write-Output "Skript: Set-BitbucketPullRequestComment.ps1 Aktualni adresar: $(Get-Location)"
 
     try {
-        # Načtení konfigurace
-        $config = Get-FullConfig
+        # Nacteni konfigurace
+        $config = DWHBI-GetConfig
 
-        # Lokální proměnné z konfigurace
+        # Lokalni promenne z konfigurace
         $BaseUrl    = $config.Bitbucket.BaseUrl
         $ProjectKey = $config.Bitbucket.Project
         $TokenFile = $config.Bitbucket.TokenFile
         if (-not (Test-Path -Path $TokenFile)) {
-            throw "Get-BitbucketPullRequestFiles: Token file nebyl nalezen: $TokenFile"
+            throw "DWHBI-Bitbucket-SetPullRequestComment: Token file nebyl nalezen: $TokenFile"
         }
         $ApiToken = Get-Content -Path $TokenFile -Raw
         
@@ -63,6 +63,6 @@
             Write-Error "Chyba pri pridavani komentare: $($_.Exception.Message)"
         }
     } catch {
-        Write-Error "Set-BitbucketPullRequestComment: Chyba pri pridavani komentare: $($_.Exception.Message)"
+        Write-Error "DWHBI-Bitbucket-SetPullRequestComment: Chyba pri pridavani komentare: $($_.Exception.Message)"
     }
 }

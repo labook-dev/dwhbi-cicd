@@ -1,5 +1,5 @@
 # Funkce pro ziskani seznamu souboru ve slozce
-function Get-FilesInFolder {
+function DWHBI-Get-FilesInFolder {
     # Lokalni promenna s pevnou hodnotou
     $folderPath = "D:\vscode\powershell\dwhbi-cicd\Repos"
 

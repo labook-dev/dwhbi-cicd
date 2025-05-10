@@ -1,8 +1,8 @@
 ﻿# Funkce pro nacteni prihlasovacich udaju
-function Get-Credentials {
+function DWHBI-Get-Credentials {
     param (
         [Parameter(Mandatory = $true)]
-        [string]$PasswordFilePath, #cesta k souboru s heslem
+        [string]$PasswordFilePath, # cesta k souboru s heslem
         [Parameter(Mandatory = $true)]
         [string]$Username
     )
@@ -13,7 +13,7 @@ function Get-Credentials {
     if (Test-Path $PasswordFilePath) {
         $securePassword = Get-Content $PasswordFilePath | ConvertTo-SecureString
     } else {
-        Write-Error "Get-Credentials: Soubor s heslem nebyl nalezen na ceste: $PasswordFilePath."
+        Write-Error "DWHBI-Get-Credentials: Soubor s heslem nebyl nalezen na ceste: $PasswordFilePath."
         exit 1
     }
 

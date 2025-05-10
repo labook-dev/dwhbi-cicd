@@ -1,4 +1,4 @@
-﻿function Get-BitbucketPullRequestFiles {
+﻿function DWHBI-Bitbucket-GetPullRequestFiles {
     <#
     .SYNOPSIS
     Nacte seznam souboru z pull requestu vcetne jejich vlastnosti.
@@ -11,9 +11,6 @@
     .PARAMETER PullRequestId
     ID pull requestu, ze ktereho se maji nacist soubory.
 
-    .PARAMETER Environment
-    Prostredi, ze ktereho se maji nacist konfigurace (napr. TEST nebo PROD).
-
     .PARAMETER Repository
     Nazev repozitare, ze ktereho se maji nacist soubory.
 
@@ -21,7 +18,7 @@
     Vraci seznam souboru jako objekt PowerShellu.
 
     .EXAMPLE
-    $Files = Get-BB-PullRequestFiles -PullRequestId 4 -Environment "TEST" -Repository "my-repo"
+    $Files = DWHBI-Bitbucket-GetPullRequestFiles -PullRequestId 4 -Repository "my-repo"
     $Files | Format-Table -AutoSize
     #>
     param (
@@ -33,19 +30,18 @@
 
     Write-Output "Skript: Get-BitbucketPullRequestFiles.ps1 Aktualni adresar: $(Get-Location)"
 
-
     $allChangedFiles = @()
 
     try {
         # Nacteni konfigurace
-        $config = Get-FullConfig
+        $config = DWHBI-GetConfig
 
         # Lokalni promenne z konfigurace
         $baseUrl    = $config.Bitbucket.BaseUrl
         $projectKey = $config.Bitbucket.Project
         $tokenFile = $config.Bitbucket.TokenFile
         if (-not (Test-Path -Path $tokenFile)) {
-            throw "Get-BitbucketPullRequestFiles: Token file nebyl nalezen: $tokenFile"
+            throw "DWHBI-Bitbucket-GetPullRequestFiles: Token file nebyl nalezen: $tokenFile"
         }
         $apiToken = Get-Content -Path $tokenFile -Raw
         
@@ -91,6 +87,6 @@
         return $allChangedFiles
 
     } catch {
-        throw "Get-BitbucketPullRequestFiles: Chyba pri ziskavani souboru z pull requestu: $($_.Exception.Message)"
+        throw "DWHBI-Bitbucket-GetPullRequestFiles: Chyba pri ziskavani souboru z pull requestu: $($_.Exception.Message)"
     }
 }

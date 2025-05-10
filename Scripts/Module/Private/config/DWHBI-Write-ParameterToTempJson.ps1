@@ -16,7 +16,7 @@
     Datum: [Aktualni datum]
 #>
 
-function Write-ParameterToTempJson {
+function DWHBI-Write-ParameterToTempJson {
     param (
         [Parameter(Mandatory = $true)]
         [string]$ParameterName,
@@ -39,7 +39,7 @@ function Write-ParameterToTempJson {
     }
 
     if (-not (Test-Path -Path $JsonFilePath)) {
-        Write-Error "Write-ParameterToTempJson: Nelze najít nebo vytvořit JSON soubor: $JsonFilePath."
+        Write-Error "DWHBI-Write-ParameterToTempJson: Nelze najit nebo vytvorit JSON soubor: $JsonFilePath."
     }
 
     # Pridani nebo aktualizace parametru

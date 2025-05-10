@@ -1,4 +1,4 @@
-function Invoke-EnsureFolderExists {
+function DWHBI-EnsureFolderExists {
     param (
         [Parameter(Mandatory = $true)]
         [string]$FolderPath

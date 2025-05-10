@@ -1,4 +1,4 @@
-function Initialize-Repository {
+function DWHBI-Git-InitializeRepository {
     param (
         [string]$Path,
         [string]$RepoUrl,

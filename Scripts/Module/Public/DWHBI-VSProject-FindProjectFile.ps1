@@ -1,10 +1,10 @@
-function Find-VSProjectFile {
+function DWHBI-VSProject-FindProjectFile {
     param (
         [Parameter(Mandatory = $true)]
         [string]$StartFileWithName
     )
 
-    # Lokální proměnná s příponami projektových souborů
+    # Lokalni promenna s priponami projektovych souboru
     $Extensions = @("*.dtproj", "*.rptproj", "*.dwproj") # SSIS, SSRS, SSAS project extensions
     Write-Verbose "Definovany seznam pripon projektovych souboru: $Extensions"
 

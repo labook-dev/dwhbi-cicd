@@ -1,4 +1,4 @@
-function Test-TeradataSqlFile {
+function DWHBI-SQL-DWHBI-GetConfigSqlFileTest {
     param(
         [string]$InputFilePath,
         [string]$ConnectionString
@@ -9,7 +9,7 @@ function Test-TeradataSqlFile {
 
     # Kontrola, zda existuje vstupni soubor
     if (-Not (Test-Path -Path $InputFilePath)) {
-        Write-Error "Test-TeradataSqlFile: The file '$InputFilePath' does not exist."
+        Write-Error "DWHBI-SQL-DWHBI-GetConfigSqlFileTest: The file '$InputFilePath' does not exist."
         return $false
     }
 
@@ -36,13 +36,19 @@ END CATCH
         # Provedeni SQL dotazu
         Invoke-Sqlcmd -ConnectionString $ConnectionString -Query $transactionQuery -QueryTimeout 10
         
+        # Zapis hodnoty do JSON souboru
+        DWHBI-Write-ParameterToTempJson -ParameterName "ValidationStatus" -ParameterValue "Success"
+
         # Vypis informace o uspesne validaci
         Write-Output "Validace Teradata SQL OK"
         return $true
     }
     catch {
+        # Zapis chyby do JSON souboru
+        DWHBI-Write-ParameterToTempJson -ParameterName "ValidationStatus" -ParameterValue "Failure"
+
         # Vypis chyby v pripade neplatneho SQL kodu
-        Write-Error "Test-TeradataSqlFile: SQL code is invalid. Error details: $_"
+        Write-Error "DWHBI-SQL-TeradataSqlFileTest: SQL code is invalid. Error details: $_"
         return $false
     }
 }

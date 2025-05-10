@@ -1,15 +1,15 @@
 # Nacteni konfigurace
-$Config = Get-FullConfig
+$Config = DWHBI-GetConfig
 $RootPath = $Config.Path.Root
 
 # Nastaveni aktualniho adresare
-Set-Location -Path $RootPatha
+Set-Location -Path $RootPath
 
 # Import funkce Get-FilesInFolder
 . Scripts\Fake\Get-FilesInFolder.ps1
 
 # Volani funkce Get-FilesInFolder
-$files = Get-FilesInFolder
+$files = DWHBI-Get-FilesInFolder
 
 # Filtrovani souboru v MS slozce
 $msFiles = $files | Where-Object { $_ -like "*\MS\*" }
@@ -22,11 +22,11 @@ Write-Output "Soubory v TD slozce:"
 Write-Output $tdFiles
 
 # Volani funkce Join-MSSQLSqlFiles s parametrem $msFiles
-$outputFile = Join-MSSQLSqlFiles -SqlFiles $msFiles -Verbose
+$outputFile = DWHBI-SQL-MSSqlJoinSqlFiles  -SqlFiles $msFiles -Verbose
 Write-Output "Vystupni soubor byl vytvoren: $outputFile"
 
 # Volani funkce Join-TeradataSqlFiles s parametrem $tdFiles
-$outputTdFile = Join-TeradataSqlFiles -SqlFiles $tdFiles -Verbose
+$outputTdFile = DWHBI-SQL-TeradataJoinSqlFiles -SqlFiles $tdFiles -Verbose
 Write-Output "Vystupni soubor pro Teradata byl vytvoren: $outputTdFile"
 
 # Pole obsahujici cesty k SSIS balickum
@@ -37,15 +37,14 @@ $ssisPackages = @(
 
 Write-Output "Cesty k SSIS balickum:"
 Write-Output $ssisPackages
-$RootPath
 
-# Definice promene $Repository
+# Definice promenne $Repository
 $Repository = "dwhbi.testovaci"
 
 # Volani funkce Find-VSProjectFile pro kazdy soubor v $ssisPackages
 foreach ($package in $ssisPackages) {
     $fullPath = Join-Path -Path $RootPath -ChildPath (Join-Path -Path $Config.Path.Repos -ChildPath (Join-Path -Path $Config.Bitbucket.Project -ChildPath (Join-Path -Path $Repository -ChildPath $package)))
-    $projectFile = Find-VSProjectFile -StartFileWithName $fullPath -Verbose
+    $projectFile = DWHBI-VSProject-FindProjectFile -StartFileWithName $fullPath -Verbose
     Write-Output "Projektovy soubor pro balicek '$package': $projectFile"
 }
 
