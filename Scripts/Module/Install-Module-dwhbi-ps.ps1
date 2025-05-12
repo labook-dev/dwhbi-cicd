@@ -29,7 +29,7 @@ try {
     # Kontrola existence a import modulu
     if (Test-Path -Path $modulePath) {
         Write-Host "Importuji modul '$moduleName' z cesty: $modulePath" -ForegroundColor Cyan
-        Import-Module $modulePath -Force -Verbose
+        Import-Module $modulePath -Force
     } else {
         Write-Error "Modul nebyl nalezen na zadane ceste: $modulePath"
     }

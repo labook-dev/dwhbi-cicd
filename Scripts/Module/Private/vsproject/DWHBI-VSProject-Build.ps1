@@ -18,15 +18,15 @@ function DWHBI-VSProject-Build {
     switch ($ProjectType) {
         "SSIS" {
             Write-Output "Spoustim build pro SSIS projekt: $projectFile"
-            DWHBI-Invoke-BuildSSISProject @PSBoundParameters
+            DWHBI-Build-SSISProject @PSBoundParameters
         }
         "SSRS" {
             Write-Output "Spoustim build pro SSRS projekt: $projectFile"
-            DWHBI-Invoke-BuildSSRSProject @PSBoundParameters
+            DWHBI-Build-VSProject @PSBoundParameters
         }
         "SSAS" {
             Write-Output "Spoustim build pro SSAS projekt: $projectFile"
-            DWHBI-Invoke-BuildSSASProject @PSBoundParameters
+            DWHBI-Build-VSProject @PSBoundParameters
         }
         default {
             throw "Neznamy typ projektu: $ProjectType"

@@ -1,0 +1,1 @@
+DWHBI-Stage-BuildConfigCreate -Repository "dwhbi.testovaci" -Branch "main" -BuildNumber "123" -Verbose

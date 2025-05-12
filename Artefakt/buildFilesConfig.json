@@ -1,4 +1,6 @@
 ﻿{
+    "BuildNumber":  "123",
+    "Branch":  "main",
     "Project":  "DWHBI",
     "files":  {
                   "SQL":  {
@@ -48,5 +50,5 @@
                                       }
                          }
               },
-    "Repository":  ""
+    "Repository":  "dwhbi.testovaci"
 }
